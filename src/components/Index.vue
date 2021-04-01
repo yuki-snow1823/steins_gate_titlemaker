@@ -16,7 +16,7 @@
     </div>
 
     <!-- v-ifで見えなくする -->
-    <a :href="tweetUrl">ツイートする！（してください）</a>
+    <a target="_blank" :href="tweetUrl">ツイートする！（してください）</a>
     <div class="name__wrapper">
       <span>
         created by

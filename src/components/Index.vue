@@ -3,13 +3,15 @@
     <p>{{ frontTitle }}</p>の
     <p>{{ backTitle }}</p>
 
-    <button v-if="hoge" @click="changeFrontTitle()">押せ！1</button>
-    <button v-else @click="stop()">ストップ</button>
+    <button v-if="switchFTitleBtn" @click="changeFrontTitle()">先頭タイトル変更</button>
+    <button v-else @click="stopChangeFront()">STOP!</button>
 
-    <button @click="changeBackTitle()">押せ！2</button>
+    <button v-if="switchBTitleBtn" @click="changeBackTitle()">後方タイトル変更</button>
+    <button v-else @click="stopChangeBack()">STOP!</button>
 
     <!-- v-ifで見えなくする -->
-    <a @click="makeTweet">ツイートする</a>
+    <a :href="tweetUrl">ツイートする！（してください）</a>
+    <span>created by <a href="https://twitter.com/yuki82511988">yuki</a></span>
   </div>
 </template>
 
@@ -21,17 +23,17 @@ export default {
       backTitle: "シュタインズゲート",
       frontWords: ["永劫回帰", "支離滅裂", "輪廻転生", "晴耕雨読"],
       backWords: ["エムブレム", "ドリーム", "ブリザード", "ニライカナイ"],
-      hoge: true,
-      aaa: "",
 
-      createdUrl: "",
+      switchFTitleBtn: true,
+      switchBTitleBtn: true,
+      tmpFrontTitle: "",
+      tmpBackTitle: "",
+
+      url: this.tweetUrl,
       tweetDefault: "https://twitter.com/intent/tweet?text="
     };
   },
   name: "Index",
-  props: {
-    msg: String
-  },
   methods: {
     randomFrontTitle: function() {
       this.frontTitle = this.frontWords[
@@ -44,21 +46,37 @@ export default {
       ];
     },
     changeFrontTitle: function() {
-      this.aaa = setInterval(() => {
+      this.tmpFrontTitle = setInterval(() => {
         this.randomFrontTitle();
       }, 100);
-      this.hoge = !this.hoge;
+      this.switchFTitleBtn = !this.switchFTitleBtn;
     },
     changeBackTitle: function() {
-      setInterval(() => {
+      this.tmpBackTitle = setInterval(() => {
         this.randomBackTitle();
       }, 100);
+      this.switchBTitleBtn = !this.switchBTitleBtn;
     },
-    makeTweet: function() {},
-    stop: function() {
-      console.log("test");
-      clearInterval(this.aaa);
-      this.hoge = !this.hoge;
+    stopChangeFront: function() {
+      clearInterval(this.tmpFrontTitle);
+      this.switchFTitleBtn = !this.switchFTitleBtn;
+    },
+    stopChangeBack: function() {
+      clearInterval(this.tmpBackTitle);
+      this.switchBTitleBtn = !this.switchBTitleBtn;
+    }
+  },
+  computed: {
+    tweetUrl: function() {
+      console.log("通っている");
+      return (
+        this.tweetDefault +
+        this.frontTitle +
+        "の" +
+        this.backTitle +
+        "&hashtags=シュタゲタイトルメーカー" +
+        "&url=https://test.jp"
+      );
     }
   }
 };

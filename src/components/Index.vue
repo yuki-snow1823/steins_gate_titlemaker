@@ -75,7 +75,7 @@ export default {
         "の" +
         this.backTitle +
         "&hashtags=シュタゲタイトルメーカー" +
-        "&url=https://test.jp"
+        "&url=https://yuki-snow1823.github.io/steins_gate_titlemaker/"
       );
     }
   }

@@ -1,27 +1,32 @@
 <template>
   <div>
-    <h1 class="app-name">シュタインズゲートっぽいタイトルメーカー</h1>
+    <h1 class="app-name">シュタインズゲートっぽい<br/>タイトルメーカー</h1>
 
     <p class="main-title">{{ frontTitle }}</p>の
     <p class="main-title">{{ backTitle }}</p>
 
     <div class="button__wrapper">
-      <button v-if="switchFTitleBtn" @click="changeFrontTitle()">先頭タイトル変更</button>
-      <button class="stop_button" v-else @click="stopChangeFront()">STOP!</button>
+      <a class="button" v-if="switchFTitleBtn" @click="changeFrontTitle()">先頭タイトル変更</a>
+      <a class="stop_button button" v-else @click="stopChangeFront()">STOP!</a>
     </div>
 
     <div class="button__wrapper">
-      <button v-if="switchBTitleBtn" @click="changeBackTitle()">後方タイトル変更</button>
-      <button class="stop_button" v-else @click="stopChangeBack()">STOP!</button>
+      <a class="button" v-if="switchBTitleBtn" @click="changeBackTitle()">後方タイトル変更</a>
+      <a class="stop_button button" v-else @click="stopChangeBack()">STOP!</a>
     </div>
 
     <!-- v-ifで見えなくする -->
     <a :href="tweetUrl">ツイートする！（してください）</a>
     <div class="name__wrapper">
       <span>
-        created by<a href="https://twitter.com/yuki82511988">yuki</a><br>
-        <a href="https://github.com/yuki-snow1823">Github</a>
+        created by
+        <a href="https://twitter.com/yuki82511988">yuki</a>
+        <br />
       </span>
+    </div>
+
+    <div>
+      <a href="https://github.com/yuki-snow1823">Github</a>
     </div>
   </div>
 </template>
@@ -32,7 +37,7 @@ export default {
     return {
       frontTitle: "境界面上",
       backTitle: "シュタインズゲート",
-      frontWords: ["永劫回帰", "支離滅裂", "輪廻転生", "晴耕雨読"],
+      frontWords: ["永劫回帰", "支離滅裂", "輪廻転生", "晴耕雨読", "鶏鳴狗盗"],
       backWords: ["エムブレム", "ドリーム", "ブリザード", "ニライカナイ"],
 
       switchFTitleBtn: true,
@@ -79,7 +84,6 @@ export default {
   },
   computed: {
     tweetUrl: function() {
-      console.log("通っている");
       return (
         this.tweetDefault +
         this.frontTitle +
@@ -105,14 +109,37 @@ export default {
   margin-bottom: 32px;
 }
 .stop_button {
-  padding: 4px 39px;
+  padding: 12px 77px !important;
 }
 
 .name__wrapper {
-  margin-top: 24px;
+  margin: 24px 0;
 }
 
 .name__wrapper > p {
   margin-bottom: 14px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 36px;
+  text-decoration: none;
+  background: #cae3f0;
+  color: rgb(192, 189, 158);
+  font-weight: bold;
+  border-bottom: solid 4px #8494b6;
+  border-radius: 3px;
+}
+.button:active {
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px); /*下に動く*/
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /*影を小さく*/
+  border-bottom: none;
+}
+
+@media (max-width: 540px) {
+  .app-name {
+    font-size: 24px;
+  }
 }
 </style>

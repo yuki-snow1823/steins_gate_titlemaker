@@ -1,17 +1,28 @@
 <template>
   <div>
-    <p>{{ frontTitle }}</p>の
-    <p>{{ backTitle }}</p>
+    <h1 class="app-name">シュタインズゲートっぽいタイトルメーカー</h1>
 
-    <button v-if="switchFTitleBtn" @click="changeFrontTitle()">先頭タイトル変更</button>
-    <button v-else @click="stopChangeFront()">STOP!</button>
+    <p class="main-title">{{ frontTitle }}</p>の
+    <p class="main-title">{{ backTitle }}</p>
 
-    <button v-if="switchBTitleBtn" @click="changeBackTitle()">後方タイトル変更</button>
-    <button v-else @click="stopChangeBack()">STOP!</button>
+    <div class="button__wrapper">
+      <button v-if="switchFTitleBtn" @click="changeFrontTitle()">先頭タイトル変更</button>
+      <button class="stop_button" v-else @click="stopChangeFront()">STOP!</button>
+    </div>
+
+    <div class="button__wrapper">
+      <button v-if="switchBTitleBtn" @click="changeBackTitle()">後方タイトル変更</button>
+      <button class="stop_button" v-else @click="stopChangeBack()">STOP!</button>
+    </div>
 
     <!-- v-ifで見えなくする -->
     <a :href="tweetUrl">ツイートする！（してください）</a>
-    <span>created by <a href="https://twitter.com/yuki82511988">yuki</a></span>
+    <div class="name__wrapper">
+      <span>
+        created by<a href="https://twitter.com/yuki82511988">yuki</a><br>
+        <a href="https://github.com/yuki-snow1823">Github</a>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -82,5 +93,26 @@ export default {
 };
 </script>
 
+
 <style scoped>
+.app-name {
+  color: #8f383f;
+}
+.main-title {
+  font-size: 24px;
+}
+.button__wrapper {
+  margin-bottom: 32px;
+}
+.stop_button {
+  padding: 4px 39px;
+}
+
+.name__wrapper {
+  margin-top: 24px;
+}
+
+.name__wrapper > p {
+  margin-bottom: 14px;
+}
 </style>
